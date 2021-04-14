@@ -1,0 +1,93 @@
+{
+    "name": "devs-webviewer",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.34",
+        "@fortawesome/free-solid-svg-icons": "^5.15.2",
+        "@fortawesome/react-fontawesome": "^0.1.14",
+        "@material-ui/core": "^4.11.3",
+        "@material-ui/icons": "^4.11.2",
+        "@material-ui/lab": "^4.0.0-alpha.57",
+        "@material-ui/pickers": "^3.2.10",
+        "@reduxjs/toolkit": "^1.5.0",
+        "clsx": "^1.1.1",
+        "file-saver": "^2.0.5",
+        "history": "^4.10.1",
+        "i18next": "^19.8.4",
+        "jsonwebtoken": "^8.5.1",
+        "lodash": "^4.17.20",
+        "material-table": "1.57.2",
+        "material-ui-dropzone": "^3.5.0",
+        "md5": "^2.3.0",
+        "moment": "^2.29.1",
+        "mutation-observer": "^1.0.3",
+        "prop-types": "^15.7.2",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
+        "react-hook-form": "^5.7.2",
+        "react-i18next": "^11.8.5",
+        "react-input-mask": "^2.0.4",
+        "react-markdown": "^5.0.3",
+        "react-redux": "^7.2.2",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^3.4.4",
+        "react-use": "^15.3.8",
+        "redux": "^4.0.5",
+        "redux-logger": "^3.0.6",
+        "redux-mock-store": "^1.5.4",
+        "yup": "^0.32.8"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "deploy": "docker-compose up --build -d",
+        "test": "react-scripts test --watchAll=false",
+        "test:dev": "react-scripts test",
+        "test:coverage": "react-scripts test --watchAll=false --coverage",
+        "test:report": "open ./coverage/lcov-report/index.html",
+        "mock:api": "json-server --watch mockApi/db.json --port 4000",
+        "eject": "react-scripts eject",
+        "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js'",
+        "lint:fix": "node_modules/eslint/bin/eslint.js 'src/**/*.js' --fix",
+        "serve": "npm run build && serve -s build"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^5.11.9",
+        "@testing-library/react": "^11.2.3",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-standard": "^14.1.1",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^2.5.1",
+        "eslint-plugin-standard": "^4.1.0",
+        "jest-dom": "^4.0.0"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/**/*.{js,jsx,ts,tsx}",
+            "!src/**/*.d.ts",
+            "!src/**/__stories__/",
+            "!<rootDir>/node_modules/"
+        ]
+    }
+}

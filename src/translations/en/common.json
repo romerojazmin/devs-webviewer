@@ -1,0 +1,22 @@
+{
+    "title": "DEVS Webviewer",
+    "appBar": {
+        "title": "DEVS Webviewer",
+        "dark": "Dark",
+        "light": "Light",
+        "theme": "Theme",
+        "settings": "Settings"
+    },
+    "confirmation": {
+        "title": "Are you sure?",
+        "ok": "Ok",
+        "cancel": "Cancel"
+    },
+    "fileUploader": {
+        "chooseFile": "Choose File",
+        "changeFile": "Change File"
+    },
+    "error": {
+        "unexpected": "An unexpected error has occured."
+    }
+}

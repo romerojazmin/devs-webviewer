@@ -1,9 +1,10 @@
 import NotFound from '../components/NotFound';
+import Diagram from '../components/Diagram';
 
 export default [
     {
         path: '/',
-        component: null,
+        component: Diagram,
     },
     {
         path: '*',

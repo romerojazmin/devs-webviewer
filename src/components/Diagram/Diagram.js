@@ -3,7 +3,17 @@ import { Box, makeStyles } from '@material-ui/core';
 import * as d3 from 'd3';
 import { ReactComponent as SVGDiagram } from '../../assets/images/diagram.svg';
 
-export const useStyles = makeStyles(() => ({ root: { padding: 30 } }));
+export const useStyles = makeStyles(() => ({ 
+    root: { 
+        padding: 10,
+        height: '91vh'
+    }, 
+    inner: { 
+        padding: 5,
+        border: '2px solid black',
+    } 
+
+}));
 
 const Diagram = () => {
     const classes = useStyles();
@@ -20,15 +30,30 @@ const Diagram = () => {
             .style('cursor', 'pointer');
     }, []);
 
-    return (
+    return (  
         <Box
-            alignItems='center'
             className={classes.root}
             display='flex'
             flexDirection='row'
+            justifyContent = 'space-between'
+            alignItems='stretch'
         >
-            <SVGDiagram />
-        </Box>
+            <Box
+                className={classes.inner}
+                alignItems='left'
+                alignContent='stretch'
+                width = {0.4}
+             
+            >   
+            </Box>
+            <Box
+                className={classes.inner}
+                alignItems='right'
+                alignContent='stretch'
+                width = {0.59}
+            >
+            </Box>
+        </Box>    
     );
 };
 
@@ -37,3 +62,4 @@ Diagram.propTypes = {};
 Diagram.defaultProps = {};
 
 export default Diagram;
+

@@ -8,7 +8,6 @@ export const useStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '1px solid black',
         padding: 10,
     },
     jsonViewer: {

@@ -1,5 +1,10 @@
 import React from 'react';
 import { Box, makeStyles } from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import ReplayIcon from '@material-ui/icons/Replay';
+import Button from '../Button';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -26,6 +31,28 @@ export const useStyles = makeStyles(() => ({
         margin: 10,
         minWidth: 450,
     },
+    buttonLoad: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        margin: 10,
+    },
+    buttonAssign: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        margin: 10,
+    },
+    buttonDonwload: {
+        position: 'absolute',
+        top: 3,
+        right: 50,
+    },
+    buttonReplay: {
+        position: 'absolute',
+        top: 3,
+        right: 0,
+    },
 }));
 
 const Viewer = () => {
@@ -38,10 +65,46 @@ const Viewer = () => {
         >
             <Box
                 className={classes.jsonViewer}
-            />
+            >
+                <Button
+                    className={classes.buttonLoad}
+                    color='primary'
+                >
+                    Load JSON
+                </Button>
+            </Box>
             <Box
                 className={classes.svgViewer}
-            />
+            >
+                <Button
+                    className={classes.buttonAssign}
+                    color='primary'
+                    endIcon={<Icon>check</Icon>}
+                    variant='contained'
+                >
+                    Assign
+                </Button>
+                <IconButton
+                    aria-label='Download JSON and SVG'
+                    className={classes.buttonDonwload}
+                    color='primary'
+                >
+                    <GetAppIcon />
+                </IconButton>
+                <IconButton
+                    aria-label='Reset the form'
+                    className={classes.buttonReplay}
+                    color='primary'
+                >
+                    <ReplayIcon />
+                </IconButton>
+                <Button
+                    className={classes.buttonLoad}
+                    color='primary'
+                >
+                    Load SVG
+                </Button>
+            </Box>
         </Box>
     );
 };

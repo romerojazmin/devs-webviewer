@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Button from '../Button';
+import FileUploader from '../FileUploader';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -57,6 +58,7 @@ export const useStyles = makeStyles(() => ({
 
 const Viewer = () => {
     const classes = useStyles();
+    const [, setJson] = useState();
 
     return (
         <Box
@@ -66,12 +68,17 @@ const Viewer = () => {
             <Box
                 className={classes.jsonViewer}
             >
-                <Button
+                <FileUploader
+                    acceptedFiles={[
+                        'application/json',
+                    ]}
+                    caption='Load JSON'
                     className={classes.buttonLoad}
-                    color='primary'
-                >
-                    Load JSON
-                </Button>
+                    error='An error has occured'
+                    onSave={files => {
+                        setJson(files[0]);
+                    }}
+                />
             </Box>
             <Box
                 className={classes.svgViewer}

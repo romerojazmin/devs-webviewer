@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, makeStyles, Typography } from '@material-ui/core';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import Button from '../Button';
 
-export const useStyles = makeStyles(theme => ({
-    error: { color: theme.palette.error.main },
-    button: { marginRight: theme.spacing(0) },
-}));
+export const useStyles = makeStyles(theme => ({ error: { color: theme.palette.error.main } }));
 
 const FileUploader = ({
     className,
     style,
     onSave,
+    error,
     acceptedFiles,
     caption,
 }) => {
     const classes = useStyles();
-    const [filename, setFilename] = React.useState('');
     const [open, setOpen] = React.useState(false);
 
     const handleClose = () => {
@@ -26,9 +23,7 @@ const FileUploader = ({
 
     const handleSave = files => {
         setOpen(false);
-        setFilename(files[0].name);
         onSave(files);
-        console.log(filename);
     };
 
     const handleOpen = () => {
@@ -59,6 +54,7 @@ const FileUploader = ({
                 open={open}
                 showPreviews
             />
+            {error && <Typography className={classes.error}>{error.message}</Typography>}
         </Box>
     );
 };
@@ -69,13 +65,18 @@ FileUploader.propTypes = {
     onSave: PropTypes.func.isRequired,
     acceptedFiles: PropTypes.array,
     caption: PropTypes.string,
+    error: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.bool,
+    ]),
 };
 
 FileUploader.defaultProps = {
     className: '',
     style: {},
     acceptedFiles: [],
-    caption: '',
+    caption: 'Choose File',
+    error: undefined,
 };
 
 export default FileUploader;

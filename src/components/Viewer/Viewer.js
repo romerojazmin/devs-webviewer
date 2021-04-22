@@ -58,7 +58,7 @@ export const useStyles = makeStyles(() => ({
 
 const Viewer = () => {
     const classes = useStyles();
-    const [json, setJson] = useState();
+    const [, setJson] = useState();
 
     return (
         <Box
@@ -74,10 +74,9 @@ const Viewer = () => {
                     ]}
                     caption='Load JSON'
                     className={classes.buttonLoad}
-                    error='Msg error'
+                    error='An error has occured'
                     onSave={files => {
                         setJson(files[0]);
-                        console.log(json);
                     }}
                 />
             </Box>

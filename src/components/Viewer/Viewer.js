@@ -4,8 +4,10 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import ReplayIcon from '@material-ui/icons/Replay';
-import Button from '../Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import FileUploader from '../FileUploader';
+import Button from '../Button';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -58,7 +60,18 @@ export const useStyles = makeStyles(() => ({
 
 const Viewer = () => {
     const classes = useStyles();
-    const [, setJson] = useState();
+    const [json, setJson] = useState();
+    const [, setSelection] = useState('');
+
+    const handleChange = event => {
+        const sel = event.target.calue;
+        setSelection(sel);
+    };
+
+    const saveJSON = async file => {
+        const text = await file.text();
+        setJson(JSON.parse(text));
+    };
 
     return (
         <Box
@@ -68,6 +81,22 @@ const Viewer = () => {
             <Box
                 className={classes.jsonViewer}
             >
+                <Select
+                    className={classes.selectEmpty}
+                    defaultValue=''
+                    disabled={!(json && Object.keys(json).length)}
+                    onChange={handleChange}
+                >
+                    {json && Object.keys(json).length && Object.keys(json).map(item => (
+                        <MenuItem
+                            key={item}
+                            value={item}
+                        >
+                            {item}
+                        </MenuItem>
+                    ))}
+                </Select>
+
                 <FileUploader
                     acceptedFiles={[
                         'application/json',
@@ -76,7 +105,7 @@ const Viewer = () => {
                     className={classes.buttonLoad}
                     error='An error has occured'
                     onSave={files => {
-                        setJson(files[0]);
+                        saveJSON(files[0]);
                     }}
                 />
             </Box>

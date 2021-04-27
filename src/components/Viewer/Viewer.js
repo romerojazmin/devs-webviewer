@@ -64,7 +64,7 @@ const Viewer = () => {
     const [, setSelection] = useState('');
 
     const handleChange = event => {
-        const sel = event.target.calue;
+        const sel = event.target.value;
         setSelection(sel);
     };
 

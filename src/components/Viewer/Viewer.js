@@ -44,9 +44,10 @@ export const useStyles = makeStyles(() => ({
         margin: 10,
         minWidth: 450,
         display: 'flex',
-        flexDirection: 'row',
         flexWrap: 'wrap',
+        flexDirection: 'row',
         justifyContent: 'center',
+        alignContent: 'flex-start',
         overflow: 'auto',
     },
     buttonLoad: {
@@ -72,11 +73,14 @@ export const useStyles = makeStyles(() => ({
         right: 0,
     },
     jsonCard: {
-        minHeight: 40,
-        width: 170,
+        minWidth: 180,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         margin: 10,
-        height: 'fit-content',
         cursor: 'pointer',
+        border: '1px solid white',
     },
 }));
 
@@ -125,7 +129,6 @@ const Viewer = () => {
                         <Card
                             key={index}
                             className={classes.jsonCard}
-                            variant='outlined'
                         >
                             <CardContent>
                                 {Object.entries(card).map((row, indexrow) => (
@@ -133,12 +136,30 @@ const Viewer = () => {
                                         key={indexrow}
                                         variant='body2'
                                     >
-                                        {`${row[0]}: ${row[1]}`}
+                                        <b>{row[0]}</b>
+                                        {`: ${row[1]}`}
                                     </Typography>
                                 ))}
                             </CardContent>
                         </Card>
                     ))}
+                    {selection && !Array.isArray(json[selection]) && (
+                        <Card
+                            className={classes.jsonCard}
+                        >
+                            <CardContent>
+                                {Object.entries(json[selection]).map((row, indexrow) => (
+                                    <Typography
+                                        key={indexrow}
+                                        variant='body2'
+                                    >
+                                        <b>{row[0]}</b>
+                                        {`: ${row[1]}`}
+                                    </Typography>
+                                ))}
+                            </CardContent>
+                        </Card>
+                    )}
                 </Box>
 
                 <FileUploader

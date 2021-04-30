@@ -127,8 +127,6 @@ const Viewer = () => {
                             className={classes.jsonCard}
                             variant='outlined'
                         >
-                            {console.log(index)}
-                            {console.log(card)}
                             <CardContent>
                                 {Object.entries(card).map((row, indexrow) => (
                                     <Typography

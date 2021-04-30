@@ -6,6 +6,9 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import FileUploader from '../FileUploader';
 import Button from '../Button';
 
@@ -34,6 +37,19 @@ export const useStyles = makeStyles(() => ({
         margin: 10,
         minWidth: 450,
     },
+    containerCards: {
+        position: 'relative',
+        height: '86%',
+        width: '98%',
+        margin: 10,
+        minWidth: 450,
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'flex-start',
+        overflow: 'auto',
+    },
     buttonLoad: {
         position: 'absolute',
         bottom: 0,
@@ -56,12 +72,22 @@ export const useStyles = makeStyles(() => ({
         top: 3,
         right: 0,
     },
+    jsonCard: {
+        minWidth: 180,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        cursor: 'pointer',
+        border: '1px solid white',
+    },
 }));
 
 const Viewer = () => {
     const classes = useStyles();
     const [json, setJson] = useState();
-    const [, setSelection] = useState('');
+    const [selection, setSelection] = useState('');
 
     const handleChange = event => {
         const sel = event.target.value;
@@ -96,6 +122,45 @@ const Viewer = () => {
                         </MenuItem>
                     ))}
                 </Select>
+                <Box
+                    className={classes.containerCards}
+                >
+                    {selection && Array.isArray(json[selection]) && json[selection].map((card, index) => (
+                        <Card
+                            key={index}
+                            className={classes.jsonCard}
+                        >
+                            <CardContent>
+                                {Object.entries(card).map((row, indexrow) => (
+                                    <Typography
+                                        key={indexrow}
+                                        variant='body2'
+                                    >
+                                        <b>{row[0]}</b>
+                                        {`: ${row[1]}`}
+                                    </Typography>
+                                ))}
+                            </CardContent>
+                        </Card>
+                    ))}
+                    {selection && !Array.isArray(json[selection]) && (
+                        <Card
+                            className={classes.jsonCard}
+                        >
+                            <CardContent>
+                                {Object.entries(json[selection]).map((row, indexrow) => (
+                                    <Typography
+                                        key={indexrow}
+                                        variant='body2'
+                                    >
+                                        <b>{row[0]}</b>
+                                        {`: ${row[1]}`}
+                                    </Typography>
+                                ))}
+                            </CardContent>
+                        </Card>
+                    )}
+                </Box>
 
                 <FileUploader
                     acceptedFiles={[

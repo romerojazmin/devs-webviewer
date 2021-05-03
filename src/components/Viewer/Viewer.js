@@ -113,8 +113,8 @@ const Viewer = () => {
         fileReader.readAsDataURL(file);
     });
 
-    const saveSVG = async file => {
-        const url = await readFileAsUrl(file);
+    const saveSVG = async files => {
+        const url = await readFileAsUrl(files[0]);
         setSVG(url);
     };
 
@@ -224,9 +224,7 @@ const Viewer = () => {
                     caption='Load SVG'
                     className={classes.buttonLoad}
                     error='An error has occured'
-                    onSave={files => {
-                        saveSVG(files[0]);
-                    }}
+                    onSave={saveSVG}
                 />
             </Box>
         </Box>

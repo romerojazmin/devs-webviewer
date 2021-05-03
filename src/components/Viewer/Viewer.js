@@ -37,6 +37,13 @@ export const useStyles = makeStyles(() => ({
         margin: 10,
         minWidth: 450,
     },
+    containerSVG: {
+        position: 'relative',
+        height: '85%',
+        width: '98%',
+        margin: 10,
+        minWidth: 450,
+    },
     containerCards: {
         position: 'relative',
         height: '86%',
@@ -87,6 +94,7 @@ export const useStyles = makeStyles(() => ({
 const Viewer = () => {
     const classes = useStyles();
     const [json, setJson] = useState();
+    const [, setSVG] = useState();
     const [selection, setSelection] = useState('');
 
     const handleChange = event => {
@@ -97,6 +105,17 @@ const Viewer = () => {
     const saveJSON = async file => {
         const text = await file.text();
         setJson(JSON.parse(text));
+    };
+
+    const readFileAsUrl = file => new Promise(resolve => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.readAsDataURL(file);
+    });
+
+    const saveSVG = async file => {
+        const url = await readFileAsUrl(file);
+        setSVG(url);
     };
 
     return (
@@ -161,7 +180,6 @@ const Viewer = () => {
                         </Card>
                     )}
                 </Box>
-
                 <FileUploader
                     acceptedFiles={[
                         'application/json',
@@ -199,12 +217,17 @@ const Viewer = () => {
                 >
                     <ReplayIcon />
                 </IconButton>
-                <Button
+                <FileUploader
+                    acceptedFiles={[
+                        'image/svg+xml',
+                    ]}
+                    caption='Load SVG'
                     className={classes.buttonLoad}
-                    color='primary'
-                >
-                    Load SVG
-                </Button>
+                    error='An error has occured'
+                    onSave={files => {
+                        saveSVG(files[0]);
+                    }}
+                />
             </Box>
         </Box>
     );

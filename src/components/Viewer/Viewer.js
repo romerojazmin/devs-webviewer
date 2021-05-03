@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import SVG from 'react-inlinesvg';
 import FileUploader from '../FileUploader';
 import Button from '../Button';
 
@@ -94,7 +95,7 @@ export const useStyles = makeStyles(() => ({
 const Viewer = () => {
     const classes = useStyles();
     const [json, setJson] = useState();
-    const [, setSVG] = useState();
+    const [svg, setSVG] = useState();
     const [selection, setSelection] = useState('');
 
     const handleChange = event => {
@@ -217,6 +218,13 @@ const Viewer = () => {
                 >
                     <ReplayIcon />
                 </IconButton>
+                {svg && (
+                    <SVG
+                        className={classes.containerSVG}
+                        id='popup-svg'
+                        src={svg}
+                    />
+                )}
                 <FileUploader
                     acceptedFiles={[
                         'image/svg+xml',

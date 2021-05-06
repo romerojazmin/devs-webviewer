@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import SVG from 'react-inlinesvg';
 import FileUploader from '../FileUploader';
 import Button from '../Button';
@@ -90,6 +91,16 @@ export const useStyles = makeStyles(() => ({
         cursor: 'pointer',
         border: '1px solid white',
     },
+    jsonCardSelected: {
+        minWidth: 180,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        cursor: 'pointer',
+        border: '1px solid tomato',
+    },
 }));
 
 const Viewer = () => {
@@ -97,6 +108,7 @@ const Viewer = () => {
     const [json, setJson] = useState();
     const [svg, setSVG] = useState();
     const [selection, setSelection] = useState('');
+    const [selectedCards, setSelectedCards] = useState(new Set());
 
     const handleChange = event => {
         const sel = event.target.value;
@@ -117,6 +129,16 @@ const Viewer = () => {
     const saveSVG = async files => {
         const url = await readFileAsUrl(files[0]);
         setSVG(url);
+    };
+
+    const onCardClick = index => {
+        const tempSet = new Set(selectedCards);
+        if (tempSet.has(index)) {
+            tempSet.delete(index);
+        } else {
+            tempSet.add(index);
+        }
+        setSelectedCards(tempSet);
     };
 
     return (
@@ -148,7 +170,8 @@ const Viewer = () => {
                     {selection && Array.isArray(json[selection]) && json[selection].map((card, index) => (
                         <Card
                             key={index}
-                            className={classes.jsonCard}
+                            className={(selectedCards.has(index)) ? classes.jsonCardSelected : classes.jsonCard}
+                            onClick={() => onCardClick(index)}
                         >
                             <CardContent>
                                 {Object.entries(card).map((row, indexrow) => (
